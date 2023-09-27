@@ -134,7 +134,7 @@ input[type='checkbox'] {
   text-decoration: line-through;
 }
 
-.toast {
+.modal {
   width: 70rem;
   height: 20rem;
   background-color: #e9dabe;
