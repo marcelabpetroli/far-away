@@ -133,3 +133,37 @@ input[type='checkbox'] {
 .packed {
   text-decoration: line-through;
 }
+
+.toast {
+  width: 70rem;
+  height: 20rem;
+  background-color: #e9dabe;
+  color: inherit;
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-transform: uppercase;
+  font-size: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  letter-spacing: 0.2rem;
+  line-height: 3.5rem;
+  gap: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2rem 2rem rgba(255, 255, 255, 0.1);
+}
+
+.btn {
+  margin-left: 1rem;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  background-color: #e7cd8b;
+  transform: translateY(-0.4rem);
+}

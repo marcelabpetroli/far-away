@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 function App() {
   const [items, setItems] = useState([]);
+  const [toast, setToast] = useState(false);
 
   function handleAddItems(item) {
     setItems((items) => [...items, item]);
@@ -19,6 +20,15 @@ function App() {
     setItems((items) => items.filter((item) => item.id !== id));
   }
 
+  function handleClearList() {
+    setItems([]);
+    setToast(false);
+  }
+
+  function handleToggleToast() {
+    setToast(!toast);
+  }
+
   return (
     <div className='app'>
       <Logo />
@@ -27,6 +37,12 @@ function App() {
         items={items}
         onToggleItem={handleToggleItem}
         onDeleteItem={handleDeleteItem}
+        onToggleToast={handleToggleToast}
+      />
+      <Toast
+        toast={toast}
+        onClearList={handleClearList}
+        onToggleToast={handleToggleToast}
       />
       <Stats />
     </div>
@@ -77,7 +93,7 @@ function Form({ onAddItems }) {
   );
 }
 
-function PackingList({ items, onToggleItem, onDeleteItem }) {
+function PackingList({ items, onToggleItem, onDeleteItem, onToggleToast }) {
   const [sortBy, setSortBy] = useState('input');
 
   let sortedItems;
@@ -111,7 +127,7 @@ function PackingList({ items, onToggleItem, onDeleteItem }) {
           <option value='description'>Sort by description</option>
           <option value='packed'>Sort by packed status</option>
         </select>
-        <button>Clear list</button>
+        <button onClick={onToggleToast}>Clear list</button>
       </div>
     </div>
   );
@@ -130,6 +146,28 @@ function Item({ item, onToggleItem, onDeleteItem }) {
       </span>
       <button onClick={() => onDeleteItem(item.id)}>❌</button>
     </li>
+  );
+}
+
+function Toast({ toast, onClearList, onToggleToast }) {
+  return (
+    <>
+      {toast ? (
+        <div className='toast'>
+          <p>‼️ Are you sure you want to delete all of your items?</p>
+          <div>
+            <button className='btn' onClick={onClearList}>
+              Yes
+            </button>
+            <button className='btn' onClick={onToggleToast}>
+              No
+            </button>
+          </div>
+        </div>
+      ) : (
+        ''
+      )}
+    </>
   );
 }
 
