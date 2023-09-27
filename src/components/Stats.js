@@ -11,7 +11,7 @@ export default function Stats({ items }) {
       <p>
         {percentage === 100
           ? `You've packed everything! ✈️`
-          : ` You've ${numItems} ${
+          : ` You've got ${numItems} ${
               numItems !== 1 ? 'items' : 'item'
             } on your list. You've already packed ${numPacked} (${percentage}%)`}
       </p>
