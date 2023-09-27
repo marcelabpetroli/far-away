@@ -11,7 +11,7 @@ function App() {
     <div className='app'>
       <Logo />
       <Form onAddItems={handleAddItems} />
-      <PackingList />
+      <PackingList items={items} />
       <Stats />
     </div>
   );
@@ -61,18 +61,28 @@ function Form({ onAddItems }) {
   );
 }
 
-function PackingList() {
+function PackingList({ items }) {
   return (
     <div className='list'>
       <ul>
-        <Item />
+        {items.map((item) => (
+          <Item item={item} key={item.id} />
+        ))}
       </ul>
     </div>
   );
 }
 
-function Item() {
-  return <li></li>;
+function Item({ item }) {
+  return (
+    <li>
+      <input type='checkbox' value={item.packed} />
+      <span>
+        {item.quantity} {item.description}
+      </span>
+      <button>❌</button>
+    </li>
+  );
 }
 
 function Stats() {
