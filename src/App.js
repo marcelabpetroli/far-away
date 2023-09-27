@@ -15,11 +15,19 @@ function App() {
     );
   }
 
+  function handleDeleteItem(id) {
+    setItems((items) => items.filter((item) => item.id !== id));
+  }
+
   return (
     <div className='app'>
       <Logo />
       <Form onAddItems={handleAddItems} />
-      <PackingList items={items} onToggleItem={handleToggleItem} />
+      <PackingList
+        items={items}
+        onToggleItem={handleToggleItem}
+        onDeleteItem={handleDeleteItem}
+      />
       <Stats />
     </div>
   );
@@ -69,19 +77,24 @@ function Form({ onAddItems }) {
   );
 }
 
-function PackingList({ items, onToggleItem }) {
+function PackingList({ items, onToggleItem, onDeleteItem }) {
   return (
     <div className='list'>
       <ul>
         {items.map((item) => (
-          <Item item={item} key={item.id} onToggleItem={onToggleItem} />
+          <Item
+            item={item}
+            key={item.id}
+            onToggleItem={onToggleItem}
+            onDeleteItem={onDeleteItem}
+          />
         ))}
       </ul>
     </div>
   );
 }
 
-function Item({ item, onToggleItem }) {
+function Item({ item, onToggleItem, onDeleteItem }) {
   return (
     <li>
       <input
@@ -92,7 +105,7 @@ function Item({ item, onToggleItem }) {
       <span className={item.packed ? 'packed' : ''}>
         {item.quantity} {item.description}
       </span>
-      <button>❌</button>
+      <button onClick={() => onDeleteItem(item.id)}>❌</button>
     </li>
   );
 }
